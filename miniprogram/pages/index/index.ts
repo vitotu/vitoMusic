@@ -1,12 +1,18 @@
 // index.ts
 // 获取应用实例
-import request from '../../utils/request.ts'
+import request from '../../utils/request'
 const app = getApp<IAppOption>()
+interface recommend {
+  picUrl:string,
+  name:string,
+  id:number,
+}
+
 
 Page({
   data: {
-    bannerList:['/static/images/nvsheng.jpg','/static/images/nvsheng.jpg','/static/images/logo.png'],
-    recommendList:<Array<{picUrl:string, name:string}>>[],
+    bannerList:['/static/images/nvsheng.jpg'],
+    recommendList:<Array<recommend>>[],
     topList:<Array<{name:string, tracks:{al:{picUrl:string}}[]}>>[]
   },
   // 事件处理函数
@@ -14,10 +20,26 @@ Page({
 
   },
   onLoad: async function (options) {
-    let bannerList:Array<{banners:Array<string>}> = await request('/banner', {type:2});
+    let data:{banners:Array<{pic:string}>} = await request('/banner', {type:2});
     this.setData({
-      bannerList:bannerList.banners,
+      bannerList:data.banners.map(item => item.pic),
     })
+    let recommendData = await request('/personalized', {limit:10});
+    this.setData({
+      recommendList:(<{result:Array<recommend>}>recommendData).result
+    })
+    let index = 0;
+    let resultArr = [];
+    while (index < 5){
+      let topListData = await request('/top/list', {idx:index++});
+      let topListItem = {name:topListData.playlist.name, tracks:topListData.playlist.tracks.slice(0, 3)};
+      console.info(topListItem)
+      resultArr.push(topListItem);
+      this.setData({
+        topList:resultArr
+      })
+    }
+    // console.info(topListData)
   },
   toRecommendSong(){
     // TODO

@@ -32,7 +32,7 @@
   <view class="recommendContainer">
     <text>推荐歌曲</text>
     <scroll-view class="recommendScroll" enable-flex scroll-x>
-      <view class="scrollItem" wx:for="{{recommendList}}" wx:key="index" wx:for-item="{{recommendItem}}">
+      <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id" wx:for-item="recommendItem">
         <image src="{{recommendItem.picUrl}}"></image>
         <text>{{recommendItem.name}}</text>
       </view>
@@ -45,7 +45,7 @@
         <view class="swiperItem">
           <view class="title">{{item.name}}</view>
           <view class="musicItem" wx:for="{{item.tracks}}" wx:key="id" wx:for-item="musicItem">
-            <image src="musicItem.al.picUrl"></image>
+            <image src="{{musicItem.al.picUrl}}"></image>
             <text class="count">{{index+1}}</text>
             <text class="musicName">{{musicItem.name}}</text>
           </view>

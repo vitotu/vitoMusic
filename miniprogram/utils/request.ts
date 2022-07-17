@@ -1,6 +1,6 @@
 import config from './config';
 
-export default function(url: string, data: {isLogin?:boolean}, method:any):Promise<any>{
+export default function(url: string, data:Object, method:any="GET"):Promise<any>{
   return new Promise((resolve, reject) =>{
     wx.request({
       url: config.host + url,
@@ -10,7 +10,7 @@ export default function(url: string, data: {isLogin?:boolean}, method:any):Promi
         cookie: wx.getStorageSync('cookies')?wx.getStorageSync('cookies').find((item:string) => item.indexOf('MUSIC_U') !== -1):''
       },
       success:res => {
-        if(data.isLogin){
+        if((<{islogin:boolean}>data).islogin){
           wx.setStorage({
             key: 'cookies',
             data: res.cookies
