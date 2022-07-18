@@ -30,7 +30,7 @@
   </view>
 
   <view class="recommendContainer">
-    <text>推荐歌曲</text>
+    <NavHeader title="推荐歌曲" nav="为您精心推荐"></NavHeader>
     <scroll-view class="recommendScroll" enable-flex scroll-x>
       <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id" wx:for-item="recommendItem">
         <image src="{{recommendItem.picUrl}}"></image>
@@ -39,7 +39,7 @@
     </scroll-view>
   </view>
   <view class="topList">
-    <text>排行榜</text>
+    <NavHeader title="排行榜" nav="热歌风向标"></NavHeader>
     <swiper class="topListSwiper" circular next-margin="50rpx" previous-margin="50rpx">
       <swiper-item wx:for="{{topList}}" wx:key="index">
         <view class="swiperItem">
