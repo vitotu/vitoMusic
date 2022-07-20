@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/video/video"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -10,5 +11,30 @@
     "navigationBarTextStyle": "white"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar":{
+    "color": "#333",
+    "selectedColor": "#d43c33",
+    "backgroundColor": "#fff",
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text": "mian page",
+        "iconPath":"/static/images/tabs/tab-home.png",
+        "selectedIconPath":"/static/images/tabs/tab-home-current.png"
+      },
+      {
+        "pagePath":"pages/video/video",
+        "text": "video",
+        "iconPath":"/static/images/tabs/select.png",
+        "selectedIconPath":"/static/images/tabs/selected.png"
+      },
+      {
+        "pagePath":"pages/logs/logs",
+        "text": "logs",
+        "iconPath":"/static/images/tabs/tab-my.png",
+        "selectedIconPath":"/static/images/tabs/tab-my-current.png"
+      }
+    ]
+  }
 }
