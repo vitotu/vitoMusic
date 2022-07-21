@@ -54,6 +54,7 @@ Page({
   },
   async getVideoGroupListData(){
     let videoGroupListData = await request('/video/group/list',{});
+    console.info(videoGroupListData)
     this.setData({
       videoGroupList:videoGroupListData.data.slice(0,14),navId:videoGroupListData.data[0].id
     })
@@ -63,6 +64,7 @@ Page({
     if(!navId) return;
     let videoListData = await request('/video/group', {id:navId});
     wx.hideLoading();
+    console.info(videoListData)
     let index = 0;
     let videoList = videoListData.datas.map((item:{id:number}) => {
       item.id = index++;
@@ -102,7 +104,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.getVideoGroupListData();
   },
 
   /**
@@ -136,21 +138,15 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() {
 
-  },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() {
 
-  },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {
 
-  }
 })

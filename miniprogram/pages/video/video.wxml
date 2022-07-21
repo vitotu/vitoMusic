@@ -11,7 +11,7 @@
     enable-flex
     scroll-into-view="{{'scroll' + navId}}"
     scroll-with-animation>
-    <view id="{{'scroll' + item.id}}" class="navItem" wx:for="{{videoGroupLits}}" wx:key="id">
+    <view id="{{'scroll' + item.id}}" class="navItem" wx:for="{{videoGroupList}}" wx:key="id">
       <view class="navContent {{navId === item.id ? 'active':''}}" bindtap="changeNav" id="{{item.id}}" data-id="{{item.id}}">
         {{item.name}}
       </view>
