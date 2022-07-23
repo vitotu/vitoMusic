@@ -16,6 +16,7 @@
       </view>
     </view>
     <button class="confirm-btn" bindtap="login">登录</button>
+    <button class="confirm-btn" data-type="anonimous" bindtap="login">游客登录</button>
     <view class="forget-section">
       忘记密码?
     </view>

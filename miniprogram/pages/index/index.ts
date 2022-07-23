@@ -15,7 +15,6 @@ interface recommend {
   id:number,
 }
 
-
 Page({
   data: {
     bannerList:['/static/images/nvsheng.jpg'],
@@ -39,16 +38,13 @@ Page({
     let resultArr = [];
     while (index < 5){
       let topListData = await request('/playlist/track/all', {id:topListConfig[index].id, limit:10, offset:1});
-      console.info(topListData)
       let topListItem = {name:topListConfig[index].name, tracks:topListData.songs.slice(0, 3)};
-      console.info(topListItem)
       resultArr.push(topListItem);
       this.setData({
         topList:resultArr
       })
       index++;
     }
-    // console.info(topListData)
   },
   toRecommendSong(){
     // TODO

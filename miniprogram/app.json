@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/video/video",
     "pages/login/login",
-    "pages/personal/personal"
+    "pages/personal/personal",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

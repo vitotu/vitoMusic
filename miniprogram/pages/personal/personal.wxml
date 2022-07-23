@@ -3,7 +3,7 @@
     <image class="bg" src="/static/images/personal/bgImg2.jpg"></image>
     <view class="user-info-box" bindtap="toLogin">
       <view class="portrait-box">
-        <image class="portrait" src='{{userInfo.avatarUrl?userInfo.avatarUrl:"/static/images/personal/missing-face.png"}}'></image>
+        <image class="portrait" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/static/images/personal/missing-face.png'}}"></image>
       </view>
       <view class="info-box">
         <text class="username">{{userInfo.nickname?userInfo.nickname: '游客'}}</text>
@@ -60,7 +60,7 @@
         <text class="title">最近播放</text>
         <!-- 最近播放记录 -->
         <scroll-view wx:if="{{recentPlayList.length}}" scroll-x class="recentScroll" enable-flex>
-          <view class="recentItem" wx:for="{{recentPlayList}}" wx:key="{{id}}">
+          <view class="recentItem" wx:for="{{recentPlayList}}" wx:key="{{id || index}}">
             <image src="{{item.song.al.picUrl}}"></image>
           </view>
         </scroll-view>

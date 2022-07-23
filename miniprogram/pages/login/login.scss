@@ -61,9 +61,9 @@
   color: #fff;
   font-size: 32rpx;
   padding: 0;
-}
-.confirm-btn2:after{
-  border-radius: 100px;
+  &:after{
+    border-radius: 100px;
+  }
 }
 
 .forget-section{

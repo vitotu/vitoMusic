@@ -20,29 +20,39 @@ Page({
     let type = event.currentTarget.dataset.type;;
     this.setData({[type]:event.detail.value})
   },
-  async login(){
+  async login(event:any){
     let {phone, password} = this.data;
-    if(!phone){
-      wx.showToast({title:"need phone", icon:'none'})
-      return;
+    let result:{code:number, userId:string, nickname:string, avatarUrl:string}
+    if(event.currentTarget.dataset.type === 'anonimous'){
+      result = await request('/register/anonimous',{});
+    } else {
+      if(!this.loginInputCheck(phone, password)) return;
+      result = await request('/login/cellphone', {phone, password, isLogin:true});
     }
-    let phoneReg = /^1(3|4|5|6|7|8|9)\d{9}$/;
-    if(!phoneReg.test(phone)){
-      wx.showToast({title:"phone number is illegal", icon:'none'});
-      return;
-    }
-    if(!password){
-      wx.showToast({title:"need password", icon:'none'});
-      return;
-    }
-    let result = await request('/login/cellphone', {phone, password, isLogin:true});
     if(result.code === 200){
       wx.showToast({title:"login success"});
-      wx.setStorageSync('userInfo', JSON.stringify(result.profile));
+      console.log('result: ', result);
+      wx.setStorageSync('userInfo', JSON.stringify({userId:result.userId, nickname:result.nickname, avatarUrl: result.avatarUrl }));
       wx.reLaunch({url:"/pages/personal/personal"});
     } else {
       wx.showToast({title:"login failed", icon:'none'});
     }
+  },
+  loginInputCheck(phone:string, password:string){
+    if(!phone){
+      wx.showToast({title:"need phone", icon:'none'})
+      return false;
+    }
+    let phoneReg = /^1(3|4|5|6|7|8|9)\d{9}$/;
+    if(!phoneReg.test(phone)){
+      wx.showToast({title:"phone number is illegal", icon:'none'});
+      return false;
+    }
+    if(!password){
+      wx.showToast({title:"need password", icon:'none'});
+      return false;
+    }
+    return true;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
