@@ -32,7 +32,7 @@
         "selectedIconPath": "/static/images/tabs/selected.png"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/personal/personal",
         "text": "logs",
         "iconPath": "/static/images/tabs/tab-my.png",
         "selectedIconPath": "/static/images/tabs/tab-my-current.png"

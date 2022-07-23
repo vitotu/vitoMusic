@@ -2,6 +2,13 @@
 // 获取应用实例
 import request from '../../utils/request'
 const app = getApp<IAppOption>()
+const topListConfig = [
+  {id:'3779629', name:'新歌榜'},
+  {id:'3778678', name:'热歌榜'},
+  {id:'2884035', name:'原创榜'},
+  {id:'19723756', name:'飙升榜'},
+  {id:'10520166', name:'电音榜'}
+]
 interface recommend {
   picUrl:string,
   name:string,
@@ -31,13 +38,15 @@ Page({
     let index = 0;
     let resultArr = [];
     while (index < 5){
-      let topListData = await request('/top/list', {idx:index++});
-      let topListItem = {name:topListData.playlist.name, tracks:topListData.playlist.tracks.slice(0, 3)};
+      let topListData = await request('/playlist/track/all', {id:topListConfig[index].id, limit:10, offset:1});
+      console.info(topListData)
+      let topListItem = {name:topListConfig[index].name, tracks:topListData.songs.slice(0, 3)};
       console.info(topListItem)
       resultArr.push(topListItem);
       this.setData({
         topList:resultArr
       })
+      index++;
     }
     // console.info(topListData)
   },

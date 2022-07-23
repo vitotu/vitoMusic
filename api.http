@@ -1,0 +1,9 @@
+@baseHost = localhost:3000
+
+GET http://{{baseHost}}/banner http/1.1
+
+### topList change case
+get http://{{baseHost}}/playlist/detail?id=3779629 http/1.1
+
+### test
+get http://{{baseHost}}/playlist/track/all?id=3779629&limit=10&offset=1 http/1.1
