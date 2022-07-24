@@ -26,7 +26,7 @@
     bindscrolltolower="handleToLower">
     <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
       <video class="common" 
-        src="{{item.data.urlInfo.url}}"
+        src="{{item.data.urlInfo}}"
         bindplay="handlePlay"
         id="{{item.data.vid}}"
         poster="{{item.data.coverUrl}}"

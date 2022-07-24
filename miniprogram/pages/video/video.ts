@@ -1,14 +1,20 @@
 // pages/video/video.ts
 import request from '../../utils/request';
+interface VideoItem {
+  id:number,
+  data:{
+    vid:string,
+    urlInfo:string
+  }
+}
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     videoGroupList:[],
     navId:'',
-    videoList:[],
+    videoList:<VideoItem[]>[],
     videoId:'',
     videoUpdateTime: new Array<any>(),
     isTriggered:false
@@ -64,12 +70,20 @@ Page({
     if(!navId) return;
     let videoListData = await request('/video/group', {id:navId});
     wx.hideLoading();
-    console.info(videoListData)
+    console.info('videoListdata', videoListData)
     let index = 0;
-    let videoList = videoListData.datas.map((item:{id:number}) => {
+    let videoList:VideoItem[] = await Promise.all(videoListData.datas.map(async (item:VideoItem) => {
       item.id = index++;
+      let videoUrlData = await request('/video/url', {id:item.data.vid});
+      item.data.urlInfo = videoUrlData.urls[0].url;
       return item;
-    })
+    })) 
+    console.info('@fixed videoList', videoList)
+    // videoListData.datas.map((item:VideoItem) => {
+    //   item.id = index++;
+    //   let videoUrlData = await request('/video/url', {id:item.data.vid})
+    //   return item;
+    // })
     this.setData({videoList, isTriggered:false});
   },
   changeNav(event:any){
@@ -78,7 +92,7 @@ Page({
     wx.showLoading({title:'loading'});
     this.getVideoList(this.data.navId);
   },
-  handlePaly(event:any){
+  handlePlay(event:any){
     let vid = event.currentTarget.id;
     this.setData({videoId:vid});
     let videoContext = wx.createVideoContext(vid);
@@ -87,7 +101,7 @@ Page({
     if(videoItem) videoContext.seek(videoItem.currentTime);
     videoContext.play();
   },
-  handleTimeUpate(event:any){
+  handleTimeUpdate(event:any){
     let videoTimeObj = { vid:event.currentTarget.id, currentTime:event.detail.currentTime};
     let videoUpdateTime:any[] = this.data.videoUpdateTime;
     let videoItem:any = videoUpdateTime.find((item:{vid:string}) => item.vid === videoTimeObj.vid);

@@ -27,7 +27,7 @@
     <!-- 搜索历史记录 -->
     <view class="history" wx:if="{{historyList.length}}">
       <view class="title">历史</view>
-      <view class="historyItem" wx:for="{{historyList}}" wx:key="{{item}}">
+      <view class="historyItem" wx:for="{{historyList}}" wx:key="*this">
         {{item}}
       </view>
       <!-- 删除 -->

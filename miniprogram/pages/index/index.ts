@@ -49,13 +49,13 @@ Page({
   toRecommendSong(){
     // TODO
     wx.navigateTo({
-      url: ''
+      url: '/songPackage/pages/recommendSong/recommendSong'
     })
   },
   toOther(){
     // TODO
     wx.navigateTo({
-      url:''
+      url:'/otherPackage/pages/other/other'
     })
   },
   getUserProfile() {

@@ -7,3 +7,9 @@ get http://{{baseHost}}/playlist/detail?id=3779629 http/1.1
 
 ### test
 get http://{{baseHost}}/playlist/track/all?id=3779629&limit=10&offset=1 http/1.1
+
+### search test
+get http://{{baseHost}}/search?keywords=最伟大的作品&limit=10 http/1.1
+
+### 
+get http://{{baseHost}}/video/url?id=A429021E4B666F4864DD7713724862F6 http/1.1

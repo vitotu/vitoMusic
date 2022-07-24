@@ -4,6 +4,16 @@ let isSend = false;
 interface searchItem {
 
 }
+function debounce(fn:Function, delay:number):Function {
+  let timer:number|null= null;
+  return function(this:any){
+    let _args = Array.prototype.slice.call(arguments)
+    if(timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, _args);
+    }, delay);
+  }
+}
 Page({
 
   /**
@@ -21,7 +31,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    this.getInitData();
+    this.getSearchHistory();
   },
   async getInitData(){
     let placeholderData = await request('/search/default', {});
@@ -39,7 +50,8 @@ Page({
     this.setData({searchContent:event.detail.value.trim()});
     if(isSend) return;
     isSend = true;
-    this.getSearchList();
+    let searchFn = debounce(this.getSearchList, 500);
+    searchFn();
     setTimeout(() => isSend = false, 300);
   },
   async getSearchList(){
