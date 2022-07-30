@@ -60,7 +60,6 @@ Page({
   },
   async getVideoGroupListData(){
     let videoGroupListData = await request('/video/group/list',{});
-    console.info(videoGroupListData)
     this.setData({
       videoGroupList:videoGroupListData.data.slice(0,14),navId:videoGroupListData.data[0].id
     })
@@ -70,7 +69,6 @@ Page({
     if(!navId) return;
     let videoListData = await request('/video/group', {id:navId});
     wx.hideLoading();
-    console.info('videoListdata', videoListData)
     let index = 0;
     let videoList:VideoItem[] = await Promise.all(videoListData.datas.map(async (item:VideoItem) => {
       item.id = index++;
@@ -78,7 +76,6 @@ Page({
       item.data.urlInfo = videoUrlData.urls[0].url;
       return item;
     })) 
-    console.info('@fixed videoList', videoList)
     // videoListData.datas.map((item:VideoItem) => {
     //   item.id = index++;
     //   let videoUrlData = await request('/video/url', {id:item.data.vid})

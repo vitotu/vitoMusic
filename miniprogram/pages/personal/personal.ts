@@ -22,7 +22,6 @@ Page({
     this.getUserRecentPlayList((this.data.userInfo as {userId: string}).userId);
   },
   async getUserRecentPlayList(userId:string){
-    console.log('@:',userId);
     let recentPlayListData = await requset('/user/record', {uid:userId, type:0});
     let index = 0;
     let recentPlayList = recentPlayListData.allData.splice(0,10).map((item: {id:number}) => {
